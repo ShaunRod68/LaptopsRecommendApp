@@ -527,7 +527,7 @@ def main():
                             help="Recommendations will be within ±20% of this price")
         
         # Keyword search
-        keyword = st.text_input("Search Keyword (e.g., 'gaming', 'ultrabook')")
+        keyword = st.text_input("Search Keyword (e.g., 'nvidia', 'i7','apple')")
         
         # Recommendation button
         recommend_clicked = st.button("🚀 Get Recommendations", 
