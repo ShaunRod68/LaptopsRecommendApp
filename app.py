@@ -130,7 +130,7 @@ def process_uploaded_data(uploaded_file):
 
 def display_laptop_comparison(recommendations):
     """Display recommended laptops in a 3x2 grid using Streamlit components"""
-    st.markdown(f"<h1 style='text-align: center;'>🌟 Top Recommendations</p>", unsafe_allow_html=True)
+    st.markdown(f"<h1 style='text-align: center;'>🌟 Top Recommendations</h1>", unsafe_allow_html=True)
     
     # Create mapping dictionaries to decode the encoded values
     drive_type_map = {0: 'Unknown', 1: 'HDD', 2: 'eMMC', 3: 'SSD'}
@@ -146,8 +146,20 @@ def display_laptop_comparison(recommendations):
             if i + j < len(recommendations):
                 row = recommendations.iloc[i + j]
                 with cols[j]:
-                    # Create card container
+                    # Create card container with a subtle border
                     with st.container():
+                        st.markdown(
+                            f"""
+                            <div style='
+                                padding: 1rem;
+                                border-radius: 0.5rem;
+                                border: 1px solid var(--border-color);
+                                height: 100%;
+                            '>
+                            """,
+                            unsafe_allow_html=True
+                        )
+                        
                         # Name (with truncation)
                         st.markdown(f"**{row['Name'][:100]}{'...' if len(row['Name']) > 100 else ''}**")
                         
@@ -160,7 +172,7 @@ def display_laptop_comparison(recommendations):
                         else:
                             st.write("No image available")
                         
-                        # Price
+                        # Price (keep the red color for price as it's important)
                         st.markdown(f"<span style='color:#d32f2f; font-weight:bold; font-size:18px;'>₹{row['Price']:,}</span>", 
                                    unsafe_allow_html=True)
                         
@@ -170,8 +182,8 @@ def display_laptop_comparison(recommendations):
                             rating_display = f"<span style='color:#ffb400;'>★</span> {row['Rating']} {num_ratings}"
                             st.markdown(
                                 f"<div style='display:flex; justify-content:space-between; margin:8px 0;'>"
-                                f"<span style='font-weight:600; color:#555;'>Rating:</span>"
-                                f"<span style='font-weight:500; color:#222;'>{rating_display}</span>"
+                                f"<span style='font-weight:600;'>Rating:</span>"
+                                f"<span style='font-weight:500;'>{rating_display}</span>"
                                 f"</div>",
                                 unsafe_allow_html=True
                             )
@@ -181,8 +193,8 @@ def display_laptop_comparison(recommendations):
                             processor = row['Processor'][:20] + ('...' if len(row['Processor']) > 20 else '')
                             st.markdown(
                                 f"<div style='display:flex; justify-content:space-between; margin:8px 0;'>"
-                                f"<span style='font-weight:600; color:#555;'>Processor:</span>"
-                                f"<span style='font-weight:500; color:#222;'>{processor}</span>"
+                                f"<span style='font-weight:600;'>Processor:</span>"
+                                f"<span style='font-weight:500;'>{processor}</span>"
                                 f"</div>",
                                 unsafe_allow_html=True
                             )
@@ -192,8 +204,8 @@ def display_laptop_comparison(recommendations):
                             ram_display = f"{row['Ram_Size']} GB"
                             st.markdown(
                                 f"<div style='display:flex; justify-content:space-between; margin:8px 0;'>"
-                                f"<span style='font-weight:600; color:#555;'>RAM:</span>"
-                                f"<span style='font-weight:500; color:#222;'>{ram_display}</span>"
+                                f"<span style='font-weight:600;'>RAM:</span>"
+                                f"<span style='font-weight:500;'>{ram_display}</span>"
                                 f"</div>",
                                 unsafe_allow_html=True
                             )
@@ -204,8 +216,8 @@ def display_laptop_comparison(recommendations):
                             storage_display = f"{int(row['Primary_Drive_Size_GB'])} GB {drive_type}"
                             st.markdown(
                                 f"<div style='display:flex; justify-content:space-between; margin:8px 0;'>"
-                                f"<span style='font-weight:600; color:#555;'>Storage:</span>"
-                                f"<span style='font-weight:500; color:#222;'>{storage_display}</span>"
+                                f"<span style='font-weight:600;'>Storage:</span>"
+                                f"<span style='font-weight:500;'>{storage_display}</span>"
                                 f"</div>",
                                 unsafe_allow_html=True
                             )
@@ -215,8 +227,8 @@ def display_laptop_comparison(recommendations):
                             os_name = os_map.get(row['Operating System'], row['Operating System'])
                             st.markdown(
                                 f"<div style='display:flex; justify-content:space-between; margin:8px 0;'>"
-                                f"<span style='font-weight:600; color:#555;'>OS:</span>"
-                                f"<span style='font-weight:500; color:#222;'>{os_name}</span>"
+                                f"<span style='font-weight:600;'>OS:</span>"
+                                f"<span style='font-weight:500;'>{os_name}</span>"
                                 f"</div>",
                                 unsafe_allow_html=True
                             )
@@ -225,8 +237,8 @@ def display_laptop_comparison(recommendations):
                         if 'Warranty' in recommendations.columns:
                             st.markdown(
                                 f"<div style='display:flex; justify-content:space-between; margin:8px 0;'>"
-                                f"<span style='font-weight:600; color:#555;'>Warranty:</span>"
-                                f"<span style='font-weight:500; color:#222;'>{row['Warranty']}</span>"
+                                f"<span style='font-weight:600;'>Warranty:</span>"
+                                f"<span style='font-weight:500;'>{row['Warranty']}</span>"
                                 f"</div>",
                                 unsafe_allow_html=True
                             )
@@ -234,6 +246,8 @@ def display_laptop_comparison(recommendations):
                         # View Product button - only if column exists
                         if 'Product Link' in recommendations.columns:
                             st.link_button("View Product", row['Product Link'])
+                        
+                        st.markdown("</div>", unsafe_allow_html=True)
 
 def main():
     # Load custom CSS (if you want to keep other styling)
