@@ -1,5 +1,4 @@
 import streamlit as st
-import pyperclip  # For copy-to-clipboard functionality
 
 # Scraper code as a string
 SCRAPER_CODE = """
@@ -99,14 +98,9 @@ def main():
         file_name="flipkart_laptop_scraper.py",
         mime="text/python"
     )
-    
-    # Copy-to-clipboard option
-    if st.button("📋 Copy Code to Clipboard"):
-        pyperclip.copy(SCRAPER_CODE)
-        st.success("Code copied to clipboard!")
 
     # 👉 Return to Home page - FIXED VERSION
-    if st.button("🏠 Return to Home"):
+    if st.button("Return to Home"):
         st.switch_page("app.py")
 
 if __name__ == "__main__":
