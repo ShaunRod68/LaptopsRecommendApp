@@ -16,6 +16,7 @@ def load_css():
             background-color: #f0f8ff;
             border: 1px solid #d1e3ff;
             border-radius: 4px;
+            color: black;
         }
         .stTextInput input:focus {
             border-color: #0077ff;
