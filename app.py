@@ -238,7 +238,7 @@ def display_laptop_comparison(recommendations):
                             st.markdown(
                                 f"<div style='display:flex; justify-content:space-between; margin:8px 0;'>"
                                 f"<span style='font-weight:600;'>Warranty:</span>"
-                                f"<span style='font-weight:500;'>{row['Warranty']}</span>"
+                                f"<span style='font-weight:500;'>{row['Warranty']} Year</span>"
                                 f"</div>",
                                 unsafe_allow_html=True
                             )
