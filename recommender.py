@@ -165,7 +165,7 @@ class LaptopRecommender:
             in_range = top20[(top20['Price'] >= low) & (top20['Price'] <= high)]
             
             if in_range.empty:
-                top20['price_diff'] = abs(top20['Price'] - price_limit)
+                top20.loc[:, 'price_diff'] = abs(top20['Price'] - price_limit)
                 recommendations = top20.sort_values(['price_diff', '_score'], ascending=[True, False])
             else:
                 recommendations = in_range
